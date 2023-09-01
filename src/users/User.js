@@ -1,13 +1,15 @@
-export const User = ({ customerObj }) => {
+import "./User.css";
+
+export const User = ({ user }) => {
   return (
-    <div>
+    <div className="user">
       <div>
-        <div>Name</div>
-        <div>{customerObj.fullName}</div>
+        <div className="user-info">Name</div>
+        <div>{user.fullName}</div>
       </div>
       <div>
-        <div>Email</div>
-        <div>{customerObj.email}</div>
+        <div className="user-info">Email</div>
+        <div>{user.email}</div>
       </div>
     </div>
   );
