@@ -1,7 +1,7 @@
+import "./Tickets.css";
 import { useEffect, useState } from "react";
 import { getAllTickets } from "../../services/ticketServices";
 import { Ticket } from "./Ticket";
-import "./Tickets.css";
 import { FilterBar } from "./FilterBar";
 
 export const TicketList = () => {
