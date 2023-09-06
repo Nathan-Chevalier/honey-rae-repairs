@@ -4,17 +4,20 @@ import { getAllTickets } from "../../services/ticketServices";
 import { Ticket } from "./Ticket";
 import { FilterBar } from "./FilterBar";
 
-export const TicketList = () => {
+export const TicketList = ({ currentUser }) => {
   const [allTickets, setAllTickets] = useState([]);
   const [showEmergencyOnly, setShowEmergency] = useState(false);
   const [filteredTickets, setFilteredTickets] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
-  useEffect(() => {
+  const getAndSetTickets = () => {
     getAllTickets().then((ticketsArray) => {
       setAllTickets(ticketsArray);
-      console.log("tickets set");
     });
+  };
+
+  useEffect(() => {
+    getAndSetTickets();
   }, []); //ONLY runs on the initial render of the component because of the empty array
 
   useEffect(() => {
@@ -44,7 +47,14 @@ export const TicketList = () => {
       />
       <article className="tickets">
         {filteredTickets.map((ticket) => {
-          return <Ticket ticket={ticket} key={ticket.id} />;
+          return (
+            <Ticket
+              currentUser={currentUser}
+              ticket={ticket}
+              getAndSetTickets={getAndSetTickets}
+              key={ticket.id}
+            />
+          );
         })}
       </article>
     </div>
